@@ -1,0 +1,240 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+paths:
+  /v1/resident:
+    post:
+      summary: Create a new resident
+      tags:
+        - Resident
+      operationId: createResident
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResidentPost'
+        required: true
+      responses:
+        '201':
+          description: OK
+        '400':
+          description: BAD REQUEST
+    get:
+      summary: Get all residents registered on system and details
+      tags:
+        - Resident
+      operationId: listAllResidents
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resident'
+  /v1/resident/{nameResident}:
+    get:
+      summary: Get data about on registered resident and bill value of the condominium
+      tags:
+        - Resident
+      operationId: findResidentByName
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resident'
+    put:
+      summary: Update the surname or type of one resident
+      tags:
+        - Resident
+      operationId: updateResident
+      parameters:
+        - name: nameResident
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResidentPut'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: NOT FOUND
+    delete:
+      summary: Delete a resident and the residence associated with him
+      tags:
+        - Resident
+      operationId: deleleResident
+      parameters:
+        - name: nameResident
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /v1/residence:
+    post:
+      summary: Create a new residence
+      tags:
+        - Residence
+      operationId: createNewResidence
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResidencePost'
+        required: true
+      responses:
+        '200':
+          description: OK
+  /v1/condominium:
+    post:
+      summary: Create a new condominium
+      tags:
+        - Condominium
+      operationId: createNewCondominium
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CondominiumPost'
+        required: true
+      responses:
+        '200':
+          description: OK
+  /v1/condominium/add_expense/{expenseValue}:
+    post:
+      summary: Add a expense to a registred condominium
+      tags:
+        - Condominium
+      operationId: addExpenseCondominium
+      parameters:
+        - name: expenseValue
+          in: path
+          required: true
+          schema:
+            type: number
+        - name: condominiumName
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /v1/condominium/totalarea/{condominiumName}:
+    get:
+      summary: Get total area from a condominium
+      tags:
+        - Condominium
+      operationId: getTotalAreaCondominum
+      parameters:
+        - name: condominiumName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalAreaCondominum: 
+                    type: number
+
+components:
+  schemas:
+    ResidentPost:
+      type: object
+      properties:
+        name:
+          type: string
+        surname:
+          type: string
+        type:
+          type: string
+          enum:
+            - OWNER
+            - TENANT
+    ResidentPut:
+      type: object
+      properties:
+        surname:
+          type: string
+        type:
+          type: string
+          enum:
+            - OWNER
+            - TENANT
+    ResidencePost:
+      type: object
+      properties:
+        number:
+          type: integer
+          format: int64
+        type:
+          type: string
+          enum:
+            - HOUSE
+            - APARTMENT
+        area:
+          type: number
+        residentName:
+          type: string
+        condominiumName:
+          type: string
+    Residence:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        number:
+          type: integer
+          format: int64
+        type:
+          type: string
+          enum:
+            - HOUSE
+            - APARTMENT
+        area:
+          type: number
+        idealFraction:
+          type: number
+        condominiumValue:
+          type: number
+    Resident:
+      type: object
+      properties:
+        residence:
+          $ref: '#/components/schemas/Residence'
+        name:
+          type: string
+        surname:
+          type: string
+        type:
+          type: string
+          enum:
+            - OWNER
+            - TENANT
+    CondominiumPost:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string

@@ -1,0 +1,292 @@
+{
+	"info": {
+		"_postman_id": "4ed5a34c-4657-4eb9-9b4f-560d4ecc8ae5",
+		"name": "ResidentialApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36555684"
+	},
+	"item": [
+		{
+			"name": "resident",
+			"item": [
+				{
+					"name": "createResident",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Leonardo\",\n    \"surname\":\"Fernandes1\",\n    \"type\":\"OWNER\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/resident",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"resident"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "residentDataByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/resident/{{residentName}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"resident",
+								"{{residentName}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listAllResidents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/resident",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"resident"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateResident",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Vitor\",\n    \"surname\":\"Lacerda\",\n    \"type\":0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/resident/{{residentName}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"resident",
+								"{{residentName}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteResident",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Vitor\",\n    \"surname\":\"Lana\",\n    \"type\":0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/resident/Daniel",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"resident",
+								"Daniel"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "residence",
+			"item": [
+				{
+					"name": "createResidence",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"number\":2222,\n    \"type\":\"HOUSE\",\n    \"residentName\":\"Leonardo\",\n    \"condominiumName\":\"Count\",\n    \"area\": 47\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/residence",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"residence"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "condominium",
+			"item": [
+				{
+					"name": "getTotalAreaCondominiumByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/v1/condominium/totalarea/{{condominiumName}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"condominium",
+								"totalarea",
+								"{{condominiumName}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addExpense",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "condominiumName",
+								"value": "BELORYHILLS",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/v1/condominium/add_expense/714.61",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"condominium",
+								"add_expense",
+								"714.61"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "newCondominium",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "condominiumName",
+								"value": "{{condominiumName}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Count\",\n    \"address\":\"Count of the punpkins\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/v1/condominium",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"condominium"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "residentName",
+			"value": "Vitor"
+		},
+		{
+			"key": "condominiumName",
+			"value": "BELORYHILLS"
+		}
+	]
+}
